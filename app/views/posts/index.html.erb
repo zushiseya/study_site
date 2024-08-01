@@ -1,0 +1,17 @@
+
+  <h2>投稿一覧</h2>
+  <table class = "table table-hover table-inverse">
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <th>
+            <%= link_to post_path(post.id) do %>
+              <%= post.title %>
+            <% end %>
+          </th>
+          <th><%= post.text.truncate(10) %></th>
+          <th><%=image_tag post.get_image %></th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
