@@ -1,6 +1,6 @@
 <h2>投稿詳細</h2>
 <div>
-  <p><%= image_tag 'sample-author1.jpg' %>:<%=@post.user.name %></p>
+  <p><%= image_tag @post.user.get_profile_image(100,100) %>:<%=@post.user.name %></p>
   <p>タイトル:<%= @post.title %></p>
   <p>説明:<%= @post.text %></p>
   <p>問題:<%= @post.problem %></p>

@@ -10,7 +10,7 @@
             <% end %>
           </th>
           <th><%= post.text.truncate(10) %></th>
-          <th><%=image_tag post.get_image %></th>
+          <th><%=image_tag post.get_image(80,80 %></th>
         </tr>
       <% end %>
     </tbody>
