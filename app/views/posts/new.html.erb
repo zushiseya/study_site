@@ -1,14 +1,29 @@
-<h1>投稿フォーム</h1>
-<%= form_with model: @post do |f| %>
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-  <h4>説明</h4>
-  <%= f.text_area :text %>
-  <h4>問題</h4>
-  <%= f.text_area :problem %>
-  <h4>解説</h4>
-  <%= f.text_area :explanation %>
-  <h4>画像</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  <%= f.submit '投稿' %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>投稿フォーム</h2>
+      <% if @post.errors.any? %>
+      <h2><%= @post.errors.count %>errors prohibited this obj from being saved:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |messages| %>
+          <li><%= messages %></li>
+        <% end %>
+      </ul>
+      <% end %>
+      <%= form_with model: @post do |f| %>
+        <div><label for="inputTitle">タイトル</label></div>
+        <%= f.text_field :title,actofocus: true, id: "inputTitle", placeholder: "" %>
+        <p>説明</p>
+        <%= f.text_area :text %>
+        <p>問題</p>
+        <%= f.text_area :problem %>
+        <p>解説</p>
+        <%= f.text_area :explanation %>
+        <div><label for="inputImage">画像</label></div>
+        <%= f.file_field :profile_image, placeholder: "画像", accept: "image/*" %>
+        <p></p>
+        <p><%= f.submit '投稿' %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
