@@ -13,7 +13,7 @@
         <% @users.each do |user| %>
           <tr>
             <td>
-              <%= image_tag @user.get_profile_image, size: "100x100" %>
+              <%= image_tag user.get_profile_image, size: "100x100" %>
             </td>
             <td>
               <%= user.name %>
