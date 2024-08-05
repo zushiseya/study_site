@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+
     <script src="https://kit.fontawesome.com/a8e490ee7d.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -54,13 +54,13 @@
               <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to homes_about_path,class: 'nav-link text-light' do %>
+              <%= link_to about_homes_path,class: 'nav-link text-light' do %>
                 <i class="fa-solid fa-link"></i>About
               <% end %>
             </li>
             <li class="nav-item">
               <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
-                <i class="fa-solid fa-user-plus"></i>Sign up 
+                <i class="fa-solid fa-user-plus"></i>Sign up
               <% end %>
             </li>
             <li class="nav-item">
