@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update]
   def new
     @post = Post.new
   end
@@ -45,5 +46,13 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :image, :text, :problem, :explanation)
+  end
+  
+  def is_matching_login_user
+    @post = Post.find(params[:id])
+    @user = @post.user
+    unless @user == current_user
+      redirect_to posts_path
+    end
   end
 end
