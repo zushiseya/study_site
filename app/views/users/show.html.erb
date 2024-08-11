@@ -41,6 +41,9 @@
         <%= post.text %>
       </td>
       <td>
+        <%= "#{post.post_comments.count} コメント" %>
+      </td>
+      <td>
         <%= image_tag post.get_image, size: "100x100" %>
       </td>
     </tr>
