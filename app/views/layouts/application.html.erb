@@ -22,6 +22,9 @@
           <dvi class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
+            <div class="d-flex justify-content-center mb-2">
+              <%= render 'searches/form' %>
+            </div>
             <li class="nav-item">
               <%= link_to user_path(current_user.id), class: 'nav-link text-light' do %>
                 <i class="fa-solid fa-house"></i>Home
@@ -75,6 +78,8 @@
       </nav>
     </header>
     <%= yield %>
+    <main>
+    </main>
     <footer >
       <dvi class='container mt-5'>
         <dvi class='row'>
