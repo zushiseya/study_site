@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     get 'homes/about', to: 'homes#about', as: :about
 
     # 投稿とコメントのリソース
-    resources :posts, only: [:new, :create, :index, :show, :destroy] do
+    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :post_comments, only: [:create, :destroy]
     end
 
