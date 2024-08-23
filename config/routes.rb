@@ -1,13 +1,34 @@
 Rails.application.routes.draw do
-  get 'search' => "searches#search"
-  root to: "homes#top"
-  devise_for :users
-  
-  resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
-  resources :users, only: [:index, :show, :edit, :update,]
-  resources :post, only: [:new, :create, :index, :show, :destroy] do
-    resources :post_comments, only: [:create, :destroy]
+  # 管理者用のDeviseルート設定
+  devise_for :admin, skip: [:registrations, :password], controllers: {
+    sessions: 'admin/sessions'
+  }
+
+  namespace :admin do
+    get 'dashboards', to: 'dashboards#index'
+    resources :users, only: [:destroy]
   end
-  get 'homes/about', to: 'homes#about', as: 'about_homes'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  # 一般ユーザー用のルート設定
+  scope module: :public do
+    # Deviseのルート設定
+    devise_for :users
+
+    # ルート定義
+    root to: 'homes#top'
+
+    # 静的ページ
+    get 'homes/about', to: 'homes#about', as: :about
+
+    # 投稿とコメントのリソース
+    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resources :post_comments, only: [:create, :destroy]
+    end
+
+    # ユーザーのリソース
+    resources :users, only: [:index, :show, :edit, :update,]
+  end
+
+  # 検索ページ
+  get 'search' => "searches#search"
 end
