@@ -17,7 +17,15 @@ class ApplicationController < ActionController::Base
   end
  
   def action_is_public?
-    controller_name == 'homes' && action_name == 'top'
+    if controller_name == 'homes' && action_name == 'about'
+      return true
+    elsif  controller_name == 'homes' && action_name == 'top' 
+      return true
+    else
+      return false
+    end
+    
+    #controller_name == 'homes' && (action_name == 'about' || action_name == 'top')
   end
 
   # Deviseで許可するパラメータを設定
