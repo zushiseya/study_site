@@ -29,6 +29,6 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update,]
   end
 
-  # 検索ページ
+  # 検索ページ 
   get 'search' => "searches#search"
 end
