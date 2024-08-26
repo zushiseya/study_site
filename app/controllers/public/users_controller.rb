@@ -1,5 +1,6 @@
 class  Public::UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
+  before_action :ensure_guest_usr, only: [:edit]
   def index
     @user = current_user
     @users = User.all
@@ -35,5 +36,12 @@ private
     unless user.id == current_user.id
       redirect_to posts_path
     end
+  end
+  
+  def ensure_guest_user
+    @user = User.find(params[:id])
+    if @user.guest_user?
+      redirect_to user_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面に遷移できません。"
+    end 
   end
 end
