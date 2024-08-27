@@ -37,4 +37,10 @@ class ApplicationController < ActionController::Base
     # アカウント更新時に許可するパラメータ
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
+  
+  def reset_guest_data
+    guest_user = User.find_by(email: User::GUEST_USER_EMAIL)
+    guest_user.posts.destroy_all if guest_user.posts.any?
+    guest_user.post_comments.destroy_all if guest_user.post_comments.any?
+  end
 end
