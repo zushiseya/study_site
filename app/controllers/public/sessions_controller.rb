@@ -9,6 +9,12 @@ class Public::SessionsController < Devise::SessionsController
     about_path
   end
   
+  def destroy
+    guest_user = User.find_by(email: User::GUEST_USER_EMAIL)
+    guest_user.destroy if guest_user
+    redirect_to root_path, notice: "Guest user was successfully destroyed."
+  end
+
   protected
 
   def configure_permitted_parameters

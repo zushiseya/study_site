@@ -18,5 +18,11 @@ module StudySite
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.after_initialize do
+      guest_user = User.find_or_create_by(email: User::GUEST_USER_EMAIL)
+      
+      guest_user.posts.each { |post| post.destroy } if guest_user.posts.any?
+      guest_user.post_comments.each { |comment| comment.destroy } if guest_user.post_comments.any?
+    end
   end
 end
