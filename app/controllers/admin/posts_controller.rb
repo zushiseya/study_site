@@ -23,7 +23,7 @@ class Admin::PostsController < ApplicationController
   
   def authenticate_admin!
     if current_user.nil?
-      redirect_to new_user_session_path, alert: "ログインが必要です。" 
+      redirect_to new_user_session_path, alert: "ログインが必要です。"
     elsif !current_user.admin?
       redirect_to root_path, alert: "管理者権限が必要です。"
     end
