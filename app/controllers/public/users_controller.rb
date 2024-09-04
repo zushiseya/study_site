@@ -1,6 +1,6 @@
 class  Public::UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
-  before_action :ensure_guest_usr, only: [:edit]
+  before_action :ensure_guest_user, only: [:edit]
   def index
     @user = current_user
     @users = User.all
