@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    get 'dashboards', to: 'dashboards#index'
-    resources :users, only: [:destroy]
+    resources :users, only: [:index, :show, :destroy]
+    resources :comments, only: [:index, :destroy]
+    resources :posts, only: [:index, :show, :destroy]
   end
 
   # 一般ユーザー用のルート設定

@@ -1,0 +1,36 @@
+<div class="container px-5 px-sm-5">
+  <div>
+    <%= flash[:notice] %>
+  </div>
+<h2>投稿詳細</h2>
+  <div>
+    <p><%= image_tag @post.user.get_profile_image, size: "100x100" %>    <%=@post.user.name %></p>
+    <p>タイトル:<%= @post.title %></p>
+    <p>説明:<%= @post.text %></p>
+    <p>問題:<%= @post.problem %></p>
+    <p>解説:<%= @post.explanation %></p>
+    <%= image_tag @post.get_image, size: "200x200" %>
+    <p>投稿日:<%=@post.created_at.strftime('%Y/%m/%d') %></p>
+    <p><%= "コメント件数 #{@post.post_comments.count}" %></p>
+    <%= link_to '削除', admin_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    <%= link_to '戻る', admin_posts_path, class: 'btn btn-secondary' %>
+  </div>
+<table>
+  <tbody>
+      <% @post.post_comments.each do |post_comment| %>
+      <tr>
+        
+        <td>
+          <%= link_to user_path(post_comment.user) do %>
+            <%= image_tag post_comment.user.get_profile_image, size: "100x100" %><br>
+            <%= post_comment.user.name %>
+          <% end %>
+        </td>
+        <td><%= post_comment.comment %></td>
+        <td>
+         <%= link_to "Destroy", admin_comment_path(post_comment), method: :delete, class: "btn btn-danger pull-right", data: { confirm: '本当に削除しますか？' } %>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
