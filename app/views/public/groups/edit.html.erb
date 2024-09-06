@@ -1,0 +1,30 @@
+<h2>グループ編集画面</h2>
+
+<%= form_with model: @group do |f| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= @group.errors.count %>つのエラーが発生しました。</h3>
+      <ul>
+        <%@group.errors.full_messages.each do |messeage| %>
+          <li><%= messeage %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit "保存する" %>
+  </div>
+<% end %>
+
+<%= link_to '戻る', group_path(@group.id) %>
