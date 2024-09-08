@@ -11,20 +11,20 @@
         </ul>
     </div>
   <% end %>
-  
+
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name, autofocus: true %>
   </div>
-  
+
   <div class="field">
     <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
-  
+
   <div class="actions">
     <%= f.submit "作成する" %>
-  </div> 
+  </div>
 <% end %>
 
 <%= link_to '戻る', groups_path %>

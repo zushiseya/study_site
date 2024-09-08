@@ -23,6 +23,8 @@ module StudySite
       
       guest_user.posts.each { |post| post.destroy } if guest_user.posts.any?
       guest_user.post_comments.each { |comment| comment.destroy } if guest_user.post_comments.any?
+      guest_user.groups.each { |group| group.destroy } if guest_user.groups.any?
+      guest_user.memberships.each { |membership| membership.destroy } if guest_user.memberships.any?
     end
   end
 end

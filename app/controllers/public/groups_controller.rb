@@ -1,15 +1,19 @@
 class Public::GroupsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :owner?, only: [:edit, :update, :destroy]
   def new
     @group = Group.new
   end
   
   def create
     @group = Group.new(group_params)
+    @group.owner = current_user
     if @group.save
+      @group.users << current_user
       flash[:notice] = "投稿に成功しました。"
       redirect_to group_path(@group.id)
     else 
-      flash.now[:aleat] = "投稿に失敗しました。"
+      flash.now[:alert] = "投稿に失敗しました。"
       render :new
     end 
   end 
@@ -48,5 +52,12 @@ class Public::GroupsController < ApplicationController
   
   def group_params
     params.require(:group).permit(:name, :description)
+  end
+  
+  def owner?
+    group = Group.find(params[:id])
+    if group.owner != current_user
+      redirect_to group_path(group.id)
+    end
   end
 end

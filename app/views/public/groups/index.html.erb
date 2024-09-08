@@ -1,7 +1,30 @@
-<h2>グループ一覧</h2>
-<%= link_to '新しいグループを作成', new_group_path %>
-<% @groups.each do |group| %>
-  <li>
-    <%=link_to group.name, group_path(group.id) %>
-  </li>
-<% end %>
+<div class="container px-5 px-sm-0">
+  <h2>グループ一覧</h2>
+  <table class="table table-hover table-inverse">
+    <thead>
+      <tr>
+        <th>グループ名</th>
+        <th>説明</th>
+        <th>人数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td>
+            <%=link_to group.name, group_path(group.id) %>
+          </td>
+          <td>
+            <%= group.description %>
+          </td>
+          <td>
+            <%= "#{group.users.count} 人"  %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
+  <% if user_signed_in? %>
+    <%= link_to '新しいグループを作成', new_group_path %>
+  <% end %>
+</div>
