@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :destroy]
     resources :comments, only: [:index, :destroy]
     resources :posts, only: [:index, :show, :destroy]
+    resources :groups, only: [:index, :show, :destroy]
   end
 
   # 一般ユーザー用のルート設定
