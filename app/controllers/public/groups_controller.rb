@@ -1,6 +1,7 @@
 class Public::GroupsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :owner?, only: [:edit, :update, :destroy]
+  before_action :ensure_guest_user, only: [:create, :new]
   def new
     @group = Group.new
   end
@@ -45,7 +46,6 @@ class Public::GroupsController < ApplicationController
   def destroy
     group = Group.find(params[:id])
     group.destroy
-    #byebug
     flash[:notice] = "削除に成功しました。"
     redirect_to groups_path
   end
@@ -61,5 +61,12 @@ class Public::GroupsController < ApplicationController
     if group.owner != current_user
       redirect_to group_path(group.id)
     end
+  end
+  
+  def ensure_guest_user
+    if current_user.guest_user?
+      flash[:alert] = "ゲストユーザーはグループ機能を利用できません。"
+      redirect_to groups_path
+    end 
   end
 end
