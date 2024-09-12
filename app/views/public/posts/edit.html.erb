@@ -10,7 +10,7 @@
           <% end %>
         </ul>
       <% end %>
-      
+
       <%= form_with model: @post do |f| %>
         <div><label for="inputTitle">タイトル</label></div>
           <%= f.text_field :title,actofocus: true, id: "inputTitle", placeholder: "" %>
@@ -23,7 +23,7 @@
         <div>画像</div>
         <%= f.file_field :image, accept: "image/*" %>
         <p></p>
-        <div><%= f.submit '保存' %></div>
+        <div><%= f.submit '保存', class: "btn btn-primary" %></div>
       <% end %>
     </div>
   </div>
