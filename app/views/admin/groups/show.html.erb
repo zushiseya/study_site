@@ -1,5 +1,10 @@
-<h2>グループ名 : <%= @group.name %></h2>
-<p><strong>説明</strong> <%= @group.description %></p>
-
-  <%= link_to "グループを削除する", admin_group_path(@group.id), method: :delete, data: {confirm: "本当にグループを削除しますか？"} %>
+<div class="container px5 px-sm-5">
+  <h2>グループ詳細</h2>
   
+  <div>
+  <p><strong>グループ名:</strong> <%= @group.name %></strong></p>
+  <p><strong>グループオーナー:</strong> <%= @group.owner.name %></p>
+  <p><strong>説明</strong> <%= @group.description %></p>
+  <%= link_to "削除", admin_group_path(@group.id), method: :delete, data: {confirm: "本当にグループを削除しますか？"}, class: "btn btn-danger" %>
+  </div>
+  </div>

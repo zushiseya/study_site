@@ -12,7 +12,7 @@
       <% @groups.each do |group| %>
         <tr>
           <td>
-            <%= link_to group.name, admin_group_path(group.id) %>
+            <%= link_to group.name, admin_group_path(group.id), class: "text-decoration-none" %>
           </td>
           <td>
             <%= group.description %>
