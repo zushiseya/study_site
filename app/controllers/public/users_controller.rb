@@ -34,6 +34,7 @@ private
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == current_user.id
+      flash[:alert] = "編集機能はユーザー以外利用できません。"
       redirect_to posts_path
     end
   end
@@ -41,7 +42,8 @@ private
   def ensure_guest_user
     @user = User.find(params[:id])
     if @user.guest_user?
-      redirect_to user_path(current_user) , notice: "ゲストユーザーはプロフィール編集画面に遷移できません。"
+      flash[:alert] =  "ゲストユーザーはプロフィール編集画面に遷移できません。"
+      redirect_to user_path(current_user)
     end 
   end
 end

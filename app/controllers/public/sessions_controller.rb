@@ -10,14 +10,8 @@ class Public::SessionsController < Devise::SessionsController
   end
   
   def destroy
-    guest_user = User.find_by(email: User::GUEST_USER_EMAIL)
- 
-    if guest_user
-      guest_user.destroy
-    else 
-      sign_out
-    end 
-    redirect_to root_path, notice: "Guest user was successfully destroyed."
+   reset_guest_data if current_user.email == User::GUEST_USER_EMAIL
+   super
   end
 
   protected

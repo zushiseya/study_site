@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :destroy]
     resources :comments, only: [:index, :destroy]
     resources :posts, only: [:index, :show, :destroy]
+    resources :groups, only: [:index, :show, :destroy]
   end
 
   # 一般ユーザー用のルート設定
@@ -28,12 +29,18 @@ Rails.application.routes.draw do
 
     # ユーザーのリソース
     resources :users, only: [:index, :show, :edit, :update,]
+
+    #グループのリソース
+    resources :groups do
+      resources :memberships, only: [:create, :destroy]
+    end
+
     #ゲストユーザー用のルート設定
       devise_scope :user do
       post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
-    end    
+    end
   end
 
-  # 検索ページ 
+  # 検索ページ
   get 'search' => "searches#search"
 end
