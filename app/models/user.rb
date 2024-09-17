@@ -7,7 +7,9 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :memberships, dependent: :destroy
-  has_many :groups, through: :memberships, dependent: :destroy
+  has_many :groups, through: :memberships
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_posts, through: :favorites, source: :post
   has_one_attached :profile_image
 
   validates :name, presence: true, uniqueness: true, length: { in: 2..20 }
@@ -35,7 +37,7 @@ class User < ApplicationRecord
 
   def self.looks(search, word)
     if search == "perfect_match"
-      @user == User.where("name LIKE?", "#{word}")
+      @user = User.where("name LIKE?", "#{word}")
     elsif search == "forward_match"
       @user = User.where("name LIKE?","#{word}%")
     elsif search == "backward_match"

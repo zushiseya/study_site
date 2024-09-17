@@ -24,6 +24,10 @@ class  Public::UsersController < ApplicationController
       render :edit
     end
   end
+  
+  def favorited_posts
+    @favorited_posts = current_user.favorited_posts
+  end
 
 private 
 

@@ -5,14 +5,16 @@
       <tr>
         <th>タイトル</th>
         <th>説明</th>
-        <th></th>
+        <th>コメント数</th>
+        <th>いいね数</th>
+        <th>画像</th>
       </tr>
     </thead>
     <tbody>
       <% @posts.each do |post| %>
       <tr>
         <td>
-          <%= link_to post_path(post.id) do %>
+          <%= link_to post_path(post) do %>
             <%= post.title %>
           <% end %>
         </td>
@@ -21,6 +23,9 @@
         </td>
         <td>
           <%= "#{post.post_comments.count} コメント" %>
+        </td>
+        <td>
+           ♥<%= post.favorites.count %> いいね
         </td>
         <td>
           <%= image_tag post.get_image, size: "100x100" %>
