@@ -31,9 +31,11 @@
   <table class = "table table-hover table-inverse">
     <thead>
       <tr>
-        <th>タイトル</th>
+        <th style="width: 15%;">タイトル</th>
         <th>説明</th>
         <th></th>
+        <th></th>
+        <th>画像</th>
       </tr>
     </thead>
     <tbody>
@@ -45,10 +47,14 @@
           <% end %>
         </td>
         <td>
-          <%= post.text %>
+          <%= truncate(post.text, length: 100, omission: '...') %>
+
         </td>
         <td>
-          <%= "#{post.post_comments.count} コメント" %>
+          <%= "#{post.post_comments.count} 💬" %>
+        </td>
+        <td>
+           <%= post.favorites.count %>♥
         </td>
         <td>
           <%= image_tag post.get_image, size: "100x100" %>

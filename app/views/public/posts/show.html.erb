@@ -16,7 +16,7 @@
     <p><strong>コメント件数:</strong><%= @post.post_comments.count %></p>
   
     <% if @post.user == current_user %>
-    <%= link_to "編集", edit_post_path(@post.id), class: "btn-primary mr-2" %>
+    <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success" %>
       <%= link_to "削除", post_path(@post), method: :delete, data: {confirm: "本当に投稿を削除しますか？"}, class: "btn btn-danger" %>
     <% end %>
   </div>
@@ -42,7 +42,7 @@
             <%= link_to user_path(post_comment.user) do %>
               <%= image_tag post_comment.user.get_profile_image, size: "100x100" %><br>
               <%= post_comment.user.name %>
-            <% end %>
+            <% end %> 
           </td>
           <td class="align-middle text-left"><%= post_comment.comment %></td>
           <td class="align-middle">

@@ -5,8 +5,8 @@
       <tr>
         <th>タイトル</th>
         <th>説明</th>
-        <th>コメント数</th>
-        <th>いいね数</th>
+        <th></th>
+        <th></th>
         <th>画像</th>
       </tr>
     </thead>
@@ -19,13 +19,13 @@
           <% end %>
         </td>
         <td>
-          <%= post.text %>
+          <%= truncate(post.text, length: 100, omission: '... ') %>
         </td>
         <td>
-          <%= "#{post.post_comments.count} コメント" %>
+          <%= "#{post.post_comments.count} 💬" %>
         </td>
         <td>
-           ♥<%= post.favorites.count %> いいね
+           ♥<%= post.favorites.count %> 
         </td>
         <td>
           <%= image_tag post.get_image, size: "100x100" %>
