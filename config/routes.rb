@@ -25,10 +25,13 @@ Rails.application.routes.draw do
     # 投稿とコメントのリソース
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :post_comments, only: [:create, :destroy]
+      resource :favorite, only: [:create, :destroy]
     end
 
     # ユーザーのリソース
-    resources :users, only: [:index, :show, :edit, :update,]
+    resources :users, only: [:index, :show, :edit, :update,] do
+      get :favorited_posts, on: :member
+    end
 
     #グループのリソース
     resources :groups do
@@ -37,7 +40,7 @@ Rails.application.routes.draw do
 
     #ゲストユーザー用のルート設定
       devise_scope :user do
-      post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+        post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
     end
   end
 

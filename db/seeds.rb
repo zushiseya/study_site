@@ -40,7 +40,7 @@ Post.find_or_create_by!(title: "冷戦") do |post|
 end
 
 Post.find_or_create_by!(title: "リーマン・ショック") do |post|
-  post.text = 'アメリカ合衆国で住宅市場の悪化によるサブプライム住宅ローン危機がきっかけ[1]となり投資銀行のリーマン・ブラザーズ・ホールディングスが2008年9月15日に経営破綻し、
+  post.text = 'アメリカ合衆国で住宅市場の悪化によるサブプライム住宅ローン危機がきっかけとなり投資銀行のリーマン・ブラザーズ・ホールディングスが2008年9月15日に経営破綻し、
                そこから連鎖的に世界金融危機が発生した事象である。これは1929年に起きた世界恐慌以来の世界的な大不況である。'
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post3.jpg")
   post.user = lucas

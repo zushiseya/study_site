@@ -1,0 +1,37 @@
+<div class="container px-5 px-sm-0" >
+  <h2>いいね一覧</h2>
+  <table class="table table-hover table-inverse">
+    <thead>
+      <tr>
+        <td>タイトル</td>
+        <td>説明</td>
+        <td>コメント数</td>
+        <td>いいね数</td>
+        <td>画像</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @favorited_posts.each do |post| %>
+        <tr>
+          <td>
+            <%= link_to post_path(post) do %>
+              <%= post.title %>
+            <% end %>
+          </td>
+          <td>
+            <%= post.text %>
+          </td>
+          <td>
+            <%= "#{post.post_comments.count} コメント" %>
+          </td>
+          <td>
+            ♥<%= post.favorites.count %> いいね
+          </td>
+          <td>
+            <%= image_tag post.get_image, size: "100x100" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
