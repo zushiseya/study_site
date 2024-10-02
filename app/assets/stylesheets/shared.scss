@@ -43,7 +43,7 @@
   display: flex; /* Flexboxを使用 */
   flex-direction: column; /* 縦方向に配置 */
 }
-  
+
   /* no-label クラスを持つセルではラベルを非表示に */
   .custom-table tbody td.no-label:before {
     content: none;

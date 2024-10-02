@@ -2,9 +2,12 @@
   <h2 class="my-4">投稿詳細</h2>
   <div class="my-4">
     <div class="d-flex align-items-center mb-3">
-      <%= image_tag @post.user.get_profile_image, size: "100x100" %>
-      <p class="mb-0"><%=@post.user.name %></p>
+      <%= link_to user_path(@post.user) do %>
+        <%= image_tag @post.user.get_profile_image, size: "100x100" %><br>
+        <span class="text-dark"><%= @post.user.name %></span>
+      <% end %> 
     </div>
+    
     <p><strong>タイトル:</strong><%= @post.title %></p>
     <p><strong>説明:</strong><%= @post.text %></p>
     <p><strong>問題:</strong><%= @post.problem %></p>
@@ -17,7 +20,7 @@
   
     <% if @post.user == current_user %>
     <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success" %>
-      <%= link_to "削除", post_path(@post), method: :delete, data: {confirm: "本当に投稿を削除しますか？"}, class: "btn btn-danger" %>
+    <%= link_to "削除", post_path(@post), method: :delete, data: {confirm: "本当に投稿を削除しますか？"}, class: "btn btn-danger" %>
     <% end %>
   </div>
   
@@ -34,20 +37,20 @@
   </div>
   
   <h3>コメント</h3>
-  <table class="table">
+  <table class="table table-hover table-bordered custom-table">
     <tbody>
         <% @post.post_comments.each do |post_comment| %>
         <tr>
-          <td class="align-middle text-left">
+          <td data-label="ユーザー" class="align-middle text-left">
             <%= link_to user_path(post_comment.user) do %>
               <%= image_tag post_comment.user.get_profile_image, size: "100x100" %><br>
-              <%= post_comment.user.name %>
+              <span class="text-dark"><%= post_comment.user.name %></span>
             <% end %> 
           </td>
-          <td class="align-middle text-left"><%= post_comment.comment %></td>
-          <td class="align-middle">
+          <td data-label="コメント" class="align-middle text-left"><%= post_comment.comment %></td>
+          <td class="align-middle no-label">
             <% if post_comment.user == current_user %>
-              <%= link_to "Destroy", post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: "本当にコメントを削除しますか？"}, class: "btn btn-danger btn-sm" %>
+              <%= link_to "削除", post_post_comment_path(@post, post_comment), method: :delete, data: {confirm: "本当にコメントを削除しますか？"}, class: "btn btn-danger btn-sm" %>
             <% end %>
           </td>
         </tr>

@@ -11,16 +11,29 @@
         </tbody>
       </table>
       <% unless @user.guest_user? %>
-      <div class="row">
-        <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-          <i class="fas fa-user-cog"></i>
+        <% if @user == current_user %>
+          <div class="row">
+            <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+              <i class="fas fa-user-cog"></i>
+            <% end %>
+          </div>
+          <div class="row">
+            <%= link_to favorited_posts_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+            　<i class="fa-solid fa-heart"></i>
+            <% end %>
+          </div>
+        <% else %>
+          <% relationship = current_user.relationship_with(@user) %>
+          <% if current_user.following?(@user) %>
+            <%= link_to "フォロー中", user_relationship_path(@user.id, relationship.id), method: :delete, data: { confirm: "本当にフォロー解除しますか？"}, class: "btn btn-outline-secondary btn-black" %>
+          <% else %>
+            <%= link_to "フォロー", user_relationships_path(@user.id), method: :post, class: "btn btn-dark text-light" %>
+          <% end %>
         <% end %>
-      </div>
       <% end %>
       <div class="row">
-        <%= link_to favorited_posts_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-        <i class="fa-solid fa-heart"></i>
-        <% end %>
+            <%= link_to "<strong>#{@user.followings.count}</strong> フォロー中".html_safe, followings_user_path(@user), class: "btn btn-text-dark" %>
+            <%= link_to "<strong>#{@user.followers.count}</strong> フォロワー".html_safe, followers_user_path(@user), class: "btn btn-text-dark" %>
       </div>
     </div>
   </div>
@@ -28,10 +41,10 @@
 
 <div class="container px-5 px-sm-0">
   <h2>User Posts</h2>
-  <table class = "table table-hover table-inverse">
+  <table class="table table-hover table-bordered custom-table">
     <thead>
       <tr>
-        <th style="width: 15%;">タイトル</th>
+        <th>タイトル</th>
         <th>説明</th>
         <th></th>
         <th></th>
@@ -40,20 +53,17 @@
     </thead>
     <tbody>
       <% @posts.each do |post| %>
-      <tr>
+      <tr onclick= "window.location='<%= post_path(post.id) %>'" style="cursor: pointer;">
         <td>
-          <%= link_to post_path(post.id) do %>
-            <%= post.title %>
-          <% end %>
+          <%= post.title %>
         </td>
         <td>
           <%= truncate(post.text, length: 100, omission: '...') %>
-
         </td>
-        <td>
+        <td style= "white-space: nowrap;">
           <%= "#{post.post_comments.count} 💬" %>
         </td>
-        <td>
+        <td style= "white-space: nowrap;">
            <%= post.favorites.count %>♥
         </td>
         <td>

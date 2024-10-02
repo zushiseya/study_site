@@ -30,6 +30,11 @@ Rails.application.routes.draw do
 
     # ユーザーのリソース
     resources :users, only: [:index, :show, :edit, :update,] do
+      resources :relationships, only: [:create, :destroy]
+      member do
+        get 'followings', to: 'relationships#followings'
+        get 'followers', to: 'relationships#followers'
+      end
       get :favorited_posts, on: :member
     end
 
@@ -37,7 +42,7 @@ Rails.application.routes.draw do
     resources :groups do
       resources :memberships, only: [:create, :destroy]
     end
-
+    
     #ゲストユーザー用のルート設定
       devise_scope :user do
         post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
