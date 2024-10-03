@@ -1,42 +1,37 @@
 <div class="container px-5 px-sm-0">
-  <div>
-    <%= flash[:notice] %>
-  </div>
   <h2>Users Management</h2>
-    <table class="table table-hover table-inverse">
-      <thead>
-        <tr>
-          <th>profile_image</th>
-          <th>name</th>
-          <th>email</th>
-          <th>number of posts</th>
-          <th colspan="3"></th>
+  <table class="table table-hover table-bordered custom-table">
+    <thead>
+      <tr>
+        <th>アイコン</th>
+        <th>ユーザー名</th>
+        <th>メールアドレス</th>
+        <th>投稿数</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr onclick="window.location='<%= admin_user_path(user.id) %>'" style="cursor: pointer;">
+          <td data-label="アイコン" class="align-middle text-left">
+            <%= image_tag user.get_profile_image, size: "100x100" %>
+          </td>
+          <td data-label="ユーザー名" class="align-middle text-left">
+            <%= user.name %>
+          </td>
+          <td data-label="メールアドレス" class="align-middle text-left">
+            <%= user.email %>
+          </td>
+          <td data-label="投稿数" class="align-middle text-left">
+            <%= "#{user.posts.count} 💬" %>
+          </td>
+          <td class="align-middle no-label">
+            <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td>
-              <%= image_tag user.get_profile_image, size: "100x100" %>
-            </td>
-            <td>
-              <%= user.name %>
-            </td>
-            <td>
-              <%= user.email %>
-            </td>
-            <td>
-              <%= "#{user.posts.count} posts" %>
-            </td>
-            <td>
-              <%= link_to "閲覧",admin_user_path(user.id), class: "btn btn-success" %> 
-            </td>
-            <td>
-              <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger pull-right" %> 
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-</div> 
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
 

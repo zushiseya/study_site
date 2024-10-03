@@ -1,0 +1,34 @@
+<div class="container px-5 px-sm-0">
+  <h2><%= @user.name %> のフォロワー</h2>
+    <% if @users.any? %>
+      <table class="table table-hover table-bordered custom-table">
+        <thead>
+          <tr>
+            <th>アイコン</th>
+            <th>名前</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr onclick= "window.location='<%= user_path(user) %>'" style="cursor: pointer;">
+              <td><%= image_tag user.get_profile_image, size: "100x100" %></td>
+              <td><%= user.name %></td>
+              <td>
+                <% if current_user.following?(user) %>
+                  <% relationship = current_user.relationship_with(user) %>
+                  <%= link_to "フォロー中", user_relationship_path(user.id, relationship.id), method: :delete, data: { confirm: "本当にフォロー解除しますか？" }, class: "btn btn-outline-secondary btn-black" %>
+                <% else %>
+                  <%= link_to 'フォローバック', user_relationships_path(user.id), method: :post, class: "btn btn-dark text-light" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>フォロワーはいません。</p>
+    <% end %>
+    
+    <%= link_to '戻る', user_path(@user.id), class: "btn btn-secondary mt-3" %>
+</div>

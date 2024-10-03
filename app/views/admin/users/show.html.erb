@@ -14,32 +14,33 @@
     </div>
   </div>
 </div>
+
 <div class="container px-5 px-sm-0">
 <h2>User Posts</h2>
-<table class = "table table-hover table-inverse">
+<table class = "table table-hover table-bordered custom-table" style="width: 100%; table-layout: fixed;">
   <thead>
     <tr>
-      <th>タイトル</th>
-      <th>説明</th>
-      <th></th>
+      <th style="width: 12%;">タイトル</th>
+      <th style="width: 70%;">説明</th>
+      <th style="width: 8%;">評価</th>
+      <th style="width: 10%;">画像</th>
     </tr>
   </thead>
   <tbody>
     <% @posts.each do |post| %>
-    <tr>
-      <td>
-        <%= link_to admin_post_path(post.id) do %>
-          <%= post.title %>
-        <% end %>
+    <tr onclick= "window.location='<%= post_path(post.id) %>'" style="cursor: pointer;">
+      <td data-label="タイトル" class="align-middle text-left" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
+        <%= truncate(post.title, length: 20, omission: '... ') %>
       </td>
-      <td>
-        <%= post.text %>
+      <td data-label="説明" class="align-middle text-left" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
+        <%= truncate(post.text, length: 90, omission: '... ') %>
       </td>
-      <td>
-        <%= "#{post.post_comments.count} コメント" %>
+      <td data-label="評価" class="align-middle text-left comment-favorite">
+        <%= "#{post.post_comments.count} 💬" %>
+        <%= "#{post.favorites.count} ♥" %>
       </td>
-      <td>
-        <%= image_tag post.get_image, size: "100x100" %>
+      <td data-label="画像" class="align-middle text-left">
+        <%= image_tag post.get_image, size: "100x100", class: "img-fluid" %>
       </td>
     </tr>
     <% end %>

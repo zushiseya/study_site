@@ -1,23 +1,23 @@
 <div class="container px5 px-sm-0">
   <h2>グループ一覧</h2>
-  <table class="table table-hover table-inverse">
+  <table class="table table-hover table-bordered custom-table" style="width: 100%; table-layout: fixed;">
     <thead>
       <tr>
-        <th>グループ一覧</th>
-        <th>説明</th>
-        <th>人数</th>
+        <th style="width: 20%;">グループ名</th>
+        <th style="width: 70%;">説明</th>
+        <th style="width: 10%;">人数</th>
       </tr>
     </thead>
     <tbody>
       <% @groups.each do |group| %>
-        <tr>
-          <td>
-            <%= link_to group.name, admin_group_path(group.id), class: "text-decoration-none" %>
+        <tr onclick= "window.location='<%= admin_group_path(group.id) %>'" style="cursor: pointer;">
+          <td data-label="グループ名" class="align-middle text-left" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
+            <%= truncate(group.name, length: 25, omission: '... ') %>
           </td>
-          <td>
-            <%= group.description %>
+          <td data-label="説明" class="align-middle text-left" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
+            <%= truncate(group.description, length: 95, omission: '... ') %>
           </td>
-          <td>
+          <td data-label="人数" class="align-middle text-left">
             <%= "#{group.users.count} 人"  %>
           </td>
         </tr>

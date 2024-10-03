@@ -15,6 +15,6 @@ class Admin::UsersController < ApplicationController
       @user = User.find(params[:id])
       @user.destroy
       flash[:notice] = "ユーザー削除に成功しました"
-      redirect_to admin_posts_path
+      redirect_to admin_users_path
   end
 end
