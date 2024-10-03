@@ -13,10 +13,10 @@
       <tbody>
         <% @posts.each do |post| %>
         <tr onclick="window.location='<%= post_path(post) %>'" style="cursor: pointer;">
-          <td data-label="タイトル" class="align-middle text-left">
-            <%= post.title %>
+          <td data-label="タイトル" class="align-middle text-left" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
+            <%= truncate(post.title, length: 20, omission: '... ') %>
           </td>
-          <td data-label="説明" class="align-middle text-left">
+          <td data-label="説明" class="align-middle text-left" style="white-space: normal; word-wrap: break-word; overflow-wrap: break-word;">
             <%= truncate(post.text, length: 90, omission: '... ') %>
           </td>
           <td data-label="評価" class="align-middle text-left comment-favorite">

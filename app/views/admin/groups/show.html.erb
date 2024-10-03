@@ -1,10 +1,38 @@
 <div class="container px5 px-sm-5">
-  <h2>グループ詳細</h2>
-  
+  <h2 class="my-4">グループ詳細</h2>
   <div>
-  <p><strong>グループ名:</strong> <%= @group.name %></strong></p>
-  <p><strong>グループオーナー:</strong> <%= @group.owner.name %></p>
-  <p><strong>説明</strong> <%= @group.description %></p>
+    <h3>グループ名:<%= @group.name %></h3>
+    <h3>グループオーナー</h3>
+      <div class="d-flex align-items-center mb-3">
+        <%= link_to admin_user_path(@group.owner) do %>
+          <%=image_tag @group.owner.get_profile_image, size: "100x100" %><br>
+          <span class="text-dark"><%= @group.owner.name %></span>
+        <% end %>
+      </div>
+    <p><strong>説明:</strong> <%= @group.description %></p>
   <%= link_to "削除", admin_group_path(@group.id), method: :delete, data: {confirm: "本当にグループを削除しますか？"}, class: "btn btn-danger" %>
+  
+  <h3>グループユーザー</h3>
+    <table class="table table-hover table-bordered custom-table">
+      <thead>
+        <tr>
+          <th>アイコン</th>
+          <th>ユーザー名</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @group.memberships.each do |member| %>
+          <tr onclick= "window.location='<%= user_path(member.user) %>'" style="cursor: pointer;">
+            <td data-label="アイコン" class="align-middle text-left">
+              <%= image_tag member.user.get_profile_image, size: "100x100" %>
+            </td>
+            <td data-label="ユーザー名" class="align-middle text-left">
+              <%= member.user.name %>
+           </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <div><%= link_to '戻る', admin_groups_path, class: "btn btn-secondary mt-3" %></div>
   </div>
-  </div>
+</div>

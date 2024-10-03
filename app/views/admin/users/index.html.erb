@@ -3,9 +3,9 @@
   <table class="table table-hover table-bordered custom-table">
     <thead>
       <tr>
-        <th>プロフィール画像</th>
-        <th>名前</th>
-        <th>メール</th>
+        <th>アイコン</th>
+        <th>ユーザー名</th>
+        <th>メールアドレス</th>
         <th>投稿数</th>
         <th></th>
       </tr>
@@ -13,19 +13,19 @@
     <tbody>
       <% @users.each do |user| %>
         <tr onclick="window.location='<%= admin_user_path(user.id) %>'" style="cursor: pointer;">
-          <td>
+          <td data-label="アイコン" class="align-middle text-left">
             <%= image_tag user.get_profile_image, size: "100x100" %>
           </td>
-          <td>
+          <td data-label="ユーザー名" class="align-middle text-left">
             <%= user.name %>
           </td>
-          <td>
+          <td data-label="メールアドレス" class="align-middle text-left">
             <%= user.email %>
           </td>
-          <td>
-            <%= "#{user.posts.count} 投稿" %>
+          <td data-label="投稿数" class="align-middle text-left">
+            <%= "#{user.posts.count} 💬" %>
           </td>
-          <td>
+          <td class="align-middle no-label">
             <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
           </td>
         </tr>

@@ -2,7 +2,7 @@
   <h2 class="my-4">投稿詳細</h2>
   <div class="my-4">
     <div class="d-flex align-items-center mb-3">
-      <%= link_to user_path(@post.user) do %>
+      <%= link_to admin_user_path(@post.user) do %>
         <%= image_tag @post.user.get_profile_image, size: "100x100" %><br>
         <span class="text-dark"><%= @post.user.name %></span>
       <% end %>

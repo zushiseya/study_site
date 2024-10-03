@@ -10,14 +10,14 @@
     </thead>
     <tbody>
       <% @users.each do |user| %>
-        <tr style="cursor: pointer;">
-          <td onclick="window.location='<%= user_path(user.id) %>'">
+        <tr onclick= "window.location='<%= user_path(user.id) %>'" style="cursor: pointer;">
+          <td data-label="アイコン" class="align-middle text-left">
             <%= image_tag user.get_profile_image, size: "100x100" %>
           </td>
-          <td onclick="window.location='<%= user_path(user.id) %>'">
+          <td data-label="ユーザー名" class="align-middle text-left">
             <%= user.name %>
           </td>
-          <td>
+          <td class="align-middle no-label">
             <% if current_user.following?(user) %>
               <% relationship = current_user.relationship_with(user) %>
               <%= button_to "フォロー中", user_relationship_path(user.id, relationship.id), method: :delete, data: { confirm: "本当にフォロー解除しますか？" }, class: "btn btn-outline-secondary btn-black" %>

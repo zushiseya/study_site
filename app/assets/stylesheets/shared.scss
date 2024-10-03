@@ -44,6 +44,11 @@
   flex-direction: column; /* 縦方向に配置 */
 }
 
+td {
+  word-wrap: break-word; /* 長い単語を強制的に改行 */
+  overflow-wrap: break-word; /* 長い単語がセルの幅を超えた場合に改行 */
+}
+
   /* no-label クラスを持つセルではラベルを非表示に */
   .custom-table tbody td.no-label:before {
     content: none;

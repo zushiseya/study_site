@@ -1,8 +1,14 @@
 <div class="container px5 px-sm-5">
   <h2 class="my-4">グループ詳細</h2>
   <div>
-    <p><strong>グループ名:</strong> <%= @group.name %></p>
-    <p><strong>グループオーナー:</strong> <%= @group.owner.name %></p>
+    <h3>グループ名:<%= @group.name %></h3>
+    <h3>グループオーナー</h3>
+      <div class="d-flex align-items-center mb-3">
+        <%= link_to user_path(@group.owner) do %>
+          <%=image_tag @group.owner.get_profile_image, size: "100x100" %><br>
+          <span class="text-dark"><%= @group.owner.name %></span>
+        <% end %>
+      </div>
     <p><strong>説明:</strong> <%= @group.description %></p>
     
       <% if user_signed_in? %>
@@ -18,17 +24,32 @@
       
       <h3>グループユーザー</h3>
         <table class="table table-hover table-bordered custom-table">
+          <thead>
+            <tr>
+              <th>アイコン</th>
+              <th>ユーザー名</th>
+              <th></th>
+            </tr>
+          </thead>
           <tbody>
               <% @group.memberships.each do |member| %>
-              <tr>
-                <td class="align-middle text-left">
-                  <%= link_to user_path(member.user) do %>
-                    <%= image_tag member.user.get_profile_image, size: "100x100" %><br>
-                    <span class="text-dark"><%= member.user.name %></span>
-                  <% end %> 
+              <tr onclick= "window.location='<%= user_path(member.user) %>'" style="cursor: pointer;">
+                <td data-label="アイコン" class="align-middle text-left">
+                  <%= image_tag member.user.get_profile_image, size: "100x100" %>
                 </td>
-              </tr>
-              <% end %>
+                <td data-label="ユーザー名" class="align-middle text-left">
+                  <%= member.user.name %>
+               </td>
+               <td class="align-middle no-label">
+                <% if current_user.following?(member.user) %>
+                  <% relationship = current_user.relationship_with(member.user) %>
+                  <%= button_to "フォロー中", user_relationship_path(member.user.id, relationship.id), method: :delete, data: { confirm: "本当にフォロー解除しますか？" }, class: "btn btn-outline-secondary btn-black" %>
+                <% else %>
+                  <%= button_to "フォロー", user_relationships_path(member.user.id), method: :post, class: "btn btn-dark text-light" %>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
           </tbody>
         </table>
       <div><%= link_to '戻る', groups_path, class: "btn btn-secondary mt-3" %></div>
