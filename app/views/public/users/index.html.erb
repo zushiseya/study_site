@@ -18,11 +18,13 @@
             <%= user.name %>
           </td>
           <td class="align-middle no-label">
-            <% if current_user.following?(user) %>
-              <% relationship = current_user.relationship_with(user) %>
-              <%= button_to "フォロー中", user_relationship_path(user.id, relationship.id), method: :delete, data: { confirm: "本当にフォロー解除しますか？" }, class: "btn btn-outline-secondary btn-black" %>
-            <% else %>
-              <%= button_to "フォロー", user_relationships_path(user.id), method: :post, class: "btn btn-dark text-light" %>
+            <% if user_signed_in? && !current_user.guest_user? %>
+              <% if current_user.following?(user) %>
+                <% relationship = current_user.relationship_with(user) %>
+                <%= button_to "フォロー中", user_relationship_path(user.id, relationship.id), method: :delete, data: { confirm: "本当にフォロー解除しますか？" }, class: "btn btn-outline-secondary btn-black" %>
+              <% else %>
+                <%= button_to "フォロー", user_relationships_path(user.id), method: :post, class: "btn btn-dark text-light" %>
+              <% end %>
             <% end %>
           </td>
         </tr>

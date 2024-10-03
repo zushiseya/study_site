@@ -15,8 +15,10 @@
               <td><%= image_tag user.get_profile_image, size: "100x100" %></td>
               <td><%= user.name %></td>
               <td>
-                <% relationship = current_user.relationship_with(user) %>
-                <%= link_to "フォロー中", user_relationship_path(user.id, relationship.id), method: :delete, data: { confirm: "本当にフォロー解除しますか？" }, class: "btn btn-outline-secondary btn-black" %>
+                <% if user_signed_in? && !current_user.guest_user? %>
+                  <% relationship = current_user.relationship_with(user) %>
+                  <%= link_to "フォロー中", user_relationship_path(user.id, relationship.id), method: :delete, data: { confirm: "本当にフォロー解除しますか？" }, class: "btn btn-outline-secondary btn-black" %>
+                <% end %>
               </td>
             </tr>
           <% end %>

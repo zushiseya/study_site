@@ -10,7 +10,7 @@
           </tr>
         </tbody>
       </table>
-      <% unless @user.guest_user? %>
+      <% if user_signed_in? && !current_user.guest_user? %>
         <% if @user == current_user %>
           <div class="row">
             <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
