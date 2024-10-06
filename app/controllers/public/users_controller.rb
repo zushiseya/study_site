@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
 
   def index
-    @users = User.all
+    @users = User.excluding_guest
   end
 
   def show

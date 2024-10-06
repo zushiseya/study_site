@@ -2,6 +2,11 @@ class Public::RelationshipsController < ApplicationController
   before_action :set_user, only: [:followings, :followers]
   
   def create
+    if params[:user_id].to_i == current_user.id
+      flash[:alert] = "自分自身をフォローすることはできません。"
+      redirect_to request.referer || user_path(current_user.id) and return
+    end
+    
     if current_user.follow(params[:user_id])
       flash[:notice] = "フォローしました！"
     else

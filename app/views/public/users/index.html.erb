@@ -18,7 +18,7 @@
             <%= user.name %>
           </td>
           <td class="align-middle no-label">
-            <% if user_signed_in? && !current_user.guest_user? %>
+            <% if user_signed_in? && !current_user.guest_user? && current_user != user %>
               <% if current_user.following?(user) %>
                 <% relationship = current_user.relationship_with(user) %>
                 <%= button_to "フォロー中", user_relationship_path(user.id, relationship.id), method: :delete, data: { confirm: "本当にフォロー解除しますか？" }, class: "btn btn-outline-secondary btn-black" %>

@@ -53,6 +53,10 @@ class User < ApplicationRecord
     end
   end
   
+  def self.excluding_guest
+    where.not(email: GUEST_USER_EMAIL)
+  end
+  
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end 
