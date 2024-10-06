@@ -5,6 +5,7 @@
       <tr>
         <th>アイコン</th>
         <th>名前</th>
+        <th>投稿数</th>
         <th></th>
       </tr>
     </thead>
@@ -16,6 +17,9 @@
           </td>
           <td data-label="ユーザー名" class="align-middle text-left">
             <%= user.name %>
+          </td>
+          <td data-label="投稿数" class="align-middle text-left">
+            <%= "#{user.posts.count} 💬" %>
           </td>
           <td class="align-middle no-label">
             <% if user_signed_in? && !current_user.guest_user? && current_user != user %>

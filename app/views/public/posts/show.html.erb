@@ -25,7 +25,11 @@
   </div>
   
   <div class="mb-4">
-    <% if user_signed_in? && @user == current_user %> <!-- ログインユーザーかつ現在のユーザーの場合 -->
+    <% if @user == current_user || current_user.guest_user? %>
+      <span class="mr-2">
+        <strong><%= @post.favorites.count %></strong> いいね
+      </span>
+    <% else %>
       <% if @post.favorited_by?(current_user) %>
         <%= link_to post_favorite_path(@post), method: :delete, class: "btn btn-danger mr-2" do %>
           ♥<%= @post.favorites.count %> いいね
@@ -35,10 +39,6 @@
           ♡<%= @post.favorites.count %> いいね
         <% end %>
       <% end %>
-    <% else %> <!-- ゲストユーザーまたは別のユーザーの場合 -->
-      <span class="mr-2">
-        <strong><%= @post.favorites.count %></strong> いいね
-      </span>
     <% end %>
   </div>
 
@@ -66,16 +66,14 @@
   </table>
   
   <div class="mb-4">
-  <% unless @user.guest_user? %>
-    <% if @user == current_user %>
-      <%= form_with(model:[@post, @post_comment], local: true) do |f| %>
-        <div class="form-group">
-          <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "form-control" %>
-        </div>
-        <%= f.submit "送信" %>
-      <% end %>
-    <% else %>
-      <p class="text-danger">コメントを投稿するにはログインしてください。</p>
+  <% if current_user.guest_user? %>
+    <p class="text-danger">コメントを投稿するにはログインしてください。</p>
+  <% else %>
+    <%= form_with(model:[@post, @post_comment], local: true) do |f| %>
+      <div class="form-group">
+        <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "form-control" %>
+      </div>
+      <%= f.submit "送信" %>
     <% end %>
   <% end %>
   </div>
