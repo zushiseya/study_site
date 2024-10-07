@@ -17,7 +17,7 @@
               <td>
                 <% if user_signed_in? && !current_user.guest_user? %>
                   <% relationship = current_user.relationship_with(user) %>
-                  <%= link_to "フォロー中", user_relationship_path(user.id, relationship.id), method: :delete, data: { confirm: "本当にフォロー解除しますか？", turbolinks: false }, class: "btn btn-outline-secondary btn-black", onclick: "event.stopPropagation()"  %>
+                  <%= link_to "フォロー中", user_relationship_path(user.id, relationship.id), method: :delete, class: "btn btn-outline-secondary btn-black", onclick: "event.stopPropagation()"  %>
                 <% end %>
               </td>
             </tr>
