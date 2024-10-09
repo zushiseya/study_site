@@ -8,10 +8,10 @@
       <% end %> 
     </div>
     
-    <p><strong>タイトル:</strong><%= @post.title %></p>
-    <p><strong>説明:</strong><%= @post.text %></p>
-    <p><strong>問題:</strong><%= @post.problem %></p>
-    <p><strong>解説: </strong><%= @post.explanation %></p>
+    <p><strong>タイトル:</strong><%= @post.title.gsub("\n", "<br>").html_safe %></p>
+    <p><strong>説明:</strong><%= @post.text.gsub("\n", "<br>").html_safe %></p>
+    <p><strong>問題:</strong><%= @post.problem.gsub("\n", "<br>").html_safe %></p>
+    <p><strong>解説: </strong><%= @post.explanation.gsub("\n", "<br>").html_safe %></p>
   
     <%= image_tag @post.get_image, size: "200x200", class: "mb-3"%>
   
