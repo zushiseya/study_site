@@ -36,7 +36,7 @@ ER図: https://app.diagrams.net/#G1aeVoR04bFuQIe-svgtQHDE53bvq8yR8e#%7B%22pageId
 
 詳細設計書: https://docs.google.com/spreadsheets/d/1g4hvVhewbJhhdFIIxp3srUcX9gDn-cRtESkeYlv8l4M/edit?usp=sharing
 
-GitHubURL: zushiseya/study_site
+GitHubURL: https://github.com/zushiseya/study_site/tree/main
 
 
 ​
