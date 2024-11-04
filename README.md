@@ -29,9 +29,13 @@
 
 ## 設計書
 WBS: https://docs.google.com/spreadsheets/d/1DSbImj8212_RR5IHQ6ehpRwyjnM50nggkBA2tu96UDQ/edit?usp=sharing
+
 テーブル定義書: https://docs.google.com/spreadsheets/d/1HBSPiGj5sxTLJpn6qKMDYujxE7amIaskFZ-y7Y5hO6I/edit?gid=1044500859#gid=1044500859
+
 ER図: https://app.diagrams.net/#G1aeVoR04bFuQIe-svgtQHDE53bvq8yR8e#%7B%22pageId%22%3A%22LkA-50vI9zVlM_wPANrl%22%7D
+
 詳細設計書: https://docs.google.com/spreadsheets/d/1g4hvVhewbJhhdFIIxp3srUcX9gDn-cRtESkeYlv8l4M/edit?usp=sharing
+
 GitHubURL: zushiseya/study_site
 
 
