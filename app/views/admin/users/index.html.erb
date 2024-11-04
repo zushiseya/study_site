@@ -26,10 +26,27 @@
             <%= "#{user.posts.count} 💬" %>
           </td>
           <td class="align-middle no-label">
-            <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
+            <%= link_to '削除', admin_user_path(user), method: :delete, class: "btn btn-danger delete-button" %>
           </td>
         </tr>
       <% end %>
+    </tbody>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('.delete-button').forEach(function(button) {
+          button.addEventListener('click', function(event) {
+            if (!confirm('本当に削除しますか？')) {
+              event.preventDefault();
+            } else {
+              event.preventDefault(); 
+              return;
+            }
+            event.stopPropagation(); 
+          });
+        });
+      });
+    </script>
     </tbody>
   </table>
 </div>
